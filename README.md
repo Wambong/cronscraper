@@ -36,8 +36,8 @@ This project implements a cryptocurrency news aggregation system with automated 
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/yourusername/cryptocurrency-news-aggregator.git
-cd cryptocurrency-news-aggregator
+git clone https://github.com/Wambong/cronscraper.git
+cd cronscraper/cronjob
 ```
 
 2. Create and activate a virtual environment:
@@ -55,8 +55,8 @@ pip install -r requirements.txt
 4. Set up Prisma:
 
 ```bash
-npx prisma generate
-npx prisma migrate dev
+ prisma generate
+ prisma migrate dev
 ```
 ## Running the Project
 
