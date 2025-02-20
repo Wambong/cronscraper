@@ -19,7 +19,7 @@ This project implements a cryptocurrency news aggregation system with automated 
 
 - Automated news collection via cron jobs
 - REST API endpoints for:
-  - News feed with filtering capabilities
+  - News feed with search capabilities
   - Coin-specific news statistics
   - Sentiment analysis results
 - Database storage using Prisma
@@ -28,8 +28,8 @@ This project implements a cryptocurrency news aggregation system with automated 
 ## Prerequisites
 
 - Python 3.8+
-- Node.js (for Prisma)
-- PostgreSQL
+-  Prisma
+- Django and DRF
 
 ## Installation
 
@@ -37,14 +37,15 @@ This project implements a cryptocurrency news aggregation system with automated 
 
 ```bash
 git clone https://github.com/Wambong/cronscraper.git
-cd cronscraper/cronjob
+cd cronscraper/
 ```
 
 2. Create and activate a virtual environment:
 
 ```bash
-python -m venv venv
+
 source venv/bin/activate
+cd cronjob
 ```
 3. Install Python dependencies:
 
@@ -52,13 +53,11 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
-4. Set up Prisma:
+## load data to prisma db 
+```commandline
+python manage.py store_news
 
-```bash
- prisma generate
- prisma migrate dev
 ```
-## Running the Project
 
 1. Start the Django development server:
 
@@ -66,38 +65,50 @@ pip install -r requirements.txt
 python manage.py runserver
 ```
 
-2. Set up the cron job:
-
-```bash
-python manage.py crontab add
-```
 
 ## API Endpoints
 
 ### News Feed
 
 ```bash
-GET /api/news/
+http://127.0.0.1:8000/api/news/
 ```
-Query parameters:
+![img.png](img.png)
+
+## search box 
+### Query parameters
+```commandline
+ BTC or btc
+```
+![img_1.png](img_1.png)
+## result
+![img_2.png](img_2.png)
+
+
+## News Statistics
+### Query parameters:
+## http://127.0.0.1:8000/api/news/statistics/
+![img_3.png](img_3.png)
+```bash
+GET /api/news/statistics/
 - `coin`: Filter by cryptocurrency (e.g., BTC, ETH)
 - `date_from`: Start date (YYYY-MM-DD)
 - `date_to`: End date (YYYY-MM-DD)
-### News Statistics
-
-```bash
-GET /api/news/statistics/
 ```
+## example
+```commandline
+    {
+        "ticker": "DOGE",
+        "start_date": "2023-01-01",
+        "end_date": "2023-01-10"
+    }
+```
+![img_4.png](img_4.png)
+## Result
+![img_5.png](img_5.png)
 
-Query parameters:
-- `date_from`: Start date (YYYY-MM-DD)
-- `date_to`: End date (YYYY-MM-DD)
 
 Response includes:
 - Daily news count
 - News ratio per coin
 - Average daily sentiment
-
-## Project Structure
-
-git config user.name "wambong"
